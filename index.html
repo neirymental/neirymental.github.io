@@ -2,13 +2,201 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8">
-<title>neirymental</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>neirymental</title>
 <style>
-  body { font-family: -apple-system, sans-serif; max-width: 640px; margin: 60px auto; padding: 0 20px; color: #222; }
+  :root {
+    --bg: #ffffff;
+    --ink: #111111;
+    --ink-dim: #6b6b6b;
+    --accent: #4a5a99;
+    --accent-on-card: #aab4e6;
+    --card-bg: #121212;
+    --card-ink: #f5f5f2;
+    --card-ink-dim: #97968f;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0b0b0c;
+      --ink: #f2f1ee;
+      --ink-dim: #9a9a96;
+      --accent: #aab4e6;
+      --card-bg: #1c1c1e;
+      --card-ink: #f2f1ee;
+      --card-ink-dim: #8d8c87;
+    }
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 32px clamp(20px, 5vw, 56px) 24px;
+    gap: 40px;
+  }
+
+  .mono {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+
+  header.wordmark {
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+  }
+
+  header.wordmark strong {
+    color: var(--ink);
+    font-weight: 700;
+  }
+
+  main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .card {
+    position: relative;
+    width: min(440px, 100%);
+    background: var(--card-bg);
+    color: var(--card-ink);
+    border-radius: 20px;
+    padding: 36px 36px 32px;
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .card::after {
+    content: "";
+    position: absolute;
+    right: -60px;
+    bottom: -60px;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, var(--accent-on-card) 0%, transparent 70%);
+    opacity: 0.35;
+    z-index: -1;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--card-ink-dim);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 999px;
+    padding: 6px 12px;
+    margin-bottom: 28px;
+  }
+
+  .badge .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent-on-card);
+  }
+
+  h1 {
+    font-size: clamp(30px, 5vw, 38px);
+    line-height: 1.1;
+    font-weight: 700;
+    margin: 0 0 18px;
+    text-wrap: balance;
+  }
+
+  h1 em {
+    display: block;
+    font-family: Georgia, "Times New Roman", serif;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent-on-card);
+  }
+
+  .card p {
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--card-ink-dim);
+    max-width: 34ch;
+    margin: 0;
+  }
+
+  footer {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  footer .device-note {
+    font-size: 13.5px;
+    color: var(--ink-dim);
+    margin: 0;
+  }
+
+  footer .device-note a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+  }
+
+  footer .device-note a:hover,
+  footer .device-note a:focus-visible {
+    color: var(--ink);
+  }
+
+  footer .tag {
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    opacity: 0.7;
+    margin: 0;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .card {
+      animation: rise 0.5s ease-out;
+    }
+  }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 </style>
 </head>
 <body>
-  <h1>neirymental</h1>
+
+<header class="wordmark mono"><strong>neiry</strong> / mental</header>
+
+<main>
+  <div class="card">
+    <span class="badge mono"><span class="dot"></span>страница · в разработке</span>
+    <h1>Материалы<em>готовятся</em></h1>
+    <p>Ссылки на опубликованные страницы появятся здесь, когда материалы будут готовы к показу.</p>
+  </div>
+</main>
+
+<footer>
+  <p class="device-note">Ознакомиться подробнее с девайсом можно на сайте <a href="https://neiry.ru/mindtracker#demo">neiry.ru/mindtracker</a></p>
+  <p class="tag mono">neirymental.github.io</p>
+</footer>
+
 </body>
 </html>
